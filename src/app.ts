@@ -29,10 +29,6 @@ let currentCode = '';
 io.on("connection", (socket) => {
     connectCounter++;
 
-    socket.on('socket_id', () => {
-        socket.emit('receive_socket_id', { id: socket.id });
-    });
-
     socket.on('users_count', () => {
         socket.emit('receive_users_count', { onlineUsers: connectCounter });
     });
@@ -49,7 +45,7 @@ io.on("connection", (socket) => {
 
     socket.on('leave_room', (room) => {
 
-        // update DB when user leave codeBlock page only if user is not Mentor
+        // update DB when user leave codeBlock page only if user is not Mentor (currentCode not equal empty string)
         if (currentCodeBlockID && currentCode) {
             updateCodeBlock(currentCodeBlockID, currentCode);
             currentCode = '';
