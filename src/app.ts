@@ -52,6 +52,7 @@ io.on("connection", (socket) => {
         // update DB when user leave codeBlock page only if user is not Mentor
         if (currentCodeBlockID && currentCode) {
             updateCodeBlock(currentCodeBlockID, currentCode);
+            currentCode = '';
         }
         socket.leave(room);
     })
